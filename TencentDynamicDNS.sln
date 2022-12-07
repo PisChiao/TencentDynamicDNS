@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TencentDynamicDNS", "TencentDynamicDNS\TencentDynamicDNS.csproj", "{FA53AC7A-2FC7-4739-AFE6-67316B4FE51F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA53AC7A-2FC7-4739-AFE6-67316B4FE51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA53AC7A-2FC7-4739-AFE6-67316B4FE51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA53AC7A-2FC7-4739-AFE6-67316B4FE51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA53AC7A-2FC7-4739-AFE6-67316B4FE51F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AD6B40B-DDFF-4BAC-AC24-1B3612A851B8}
+	EndGlobalSection
+EndGlobal
