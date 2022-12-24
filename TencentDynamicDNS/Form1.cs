@@ -37,38 +37,33 @@ namespace TencentDynamicDNS
         private bool checkIp(object sender, EventArgs e)
         {
             string localIp = GetIP();
-            if (localIp != null)
-            {
-                lbl_localIp.Text = localIp;
-            }
-            else
+            if (localIp is "" or null)
             {
                 lbl_localIp.Text = "无法获取";
                 return false;
             }
-            DescribeRecordListResponse dnsIpResponse = GetDnsIp();
-            if (dnsIpResponse != null)
-            {
-                lbl_dnsIp.Text = dnsIpResponse.RecordList[0].Value;
-            }
-            else
+            lbl_localIp.Text = localIp;
+            
+            DescribeRecordListResponse? dnsIpResponse = GetDnsIp();
+            if(dnsIpResponse is null)
             {
                 lbl_dnsIp.Text = "无法获取";
                 return false;
             }
+            try
+            {
+                lbl_dnsIp.Text = dnsIpResponse.RecordList[0].Value;
+            }
+            catch(Exception ex)
+            {
+                lbl_dnsIp.Text = ex.Message;
+                return false;
+            }
+            
             if (lbl_localIp.Text != lbl_dnsIp.Text)
             {
                 SetDnsIp(dnsIpResponse.RecordList[0].RecordId, lbl_localIp.Text);
-                dnsIpResponse = GetDnsIp();
-                if (dnsIpResponse != null)
-                {
-                    lbl_dnsIp.Text = dnsIpResponse.RecordList[0].Value;
-                }
-                else
-                {
-                    lbl_dnsIp.Text = "无法获取";
-                    return false;
-                }
+                checkIp(sender, e);
             }
             return true;
         }
@@ -76,14 +71,21 @@ namespace TencentDynamicDNS
         //获取实时的本地公网IP
         public string GetIP()
         {
-            HttpClient httpClient = new HttpClient();
-            string url = "https://ifconfig.me/";
-            HttpResponseMessage response = httpClient.GetAsync(url).Result;
-            string responseBodystr = response.Content.ReadAsStringAsync().Result;
-            return responseBodystr;
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                string url = "https://ifconfig.me/";
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                string responseBodystr = response.Content.ReadAsStringAsync().Result;
+                return responseBodystr;
+            }catch(Exception ex)
+            {
+                return "";
+            }
+            
         }
         //获取当前DNS解析的IP地址
-        public DescribeRecordListResponse GetDnsIp()
+        public DescribeRecordListResponse? GetDnsIp()
         {
             try
             {
@@ -169,7 +171,7 @@ namespace TencentDynamicDNS
 
         public void Start(object sender,EventArgs e)
         {
-            if(LoadConfig() && checkIp(sender, e))
+            if(LoadConfig())
             {
                 timer1.Interval = ((int)config.interval * 1000);
                 timer1.Start();
@@ -179,6 +181,7 @@ namespace TencentDynamicDNS
             {
                 MessageBox.Show("请先填写所有配置信息并保存。");
             }
+            checkIp(sender, e);
         }
         private void button3_Click(object sender, EventArgs e)
         {

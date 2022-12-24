@@ -203,8 +203,10 @@
             // 
             // lbl_status
             // 
+            this.lbl_status.AutoEllipsis = true;
             this.lbl_status.AutoSize = true;
             this.lbl_status.Location = new System.Drawing.Point(86, 289);
+            this.lbl_status.MaximumSize = new System.Drawing.Size(132, 0);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(44, 17);
             this.lbl_status.TabIndex = 16;
