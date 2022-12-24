@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="image\" />
+	  <None Include="..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
